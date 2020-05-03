@@ -591,7 +591,7 @@
     }
 
     function addLettersParameters(i, taskCard) {
-        let expected_answers = taskCard.getElementsByTagName("expected_answer");
+        let expected_answers = taskCard.getElementsByClassName("expected_answer");
         let targetLetter = taskCard.getElementsByClassName("times");
         let lettersArray = [];
         test[TASKNAME + i]["letters"] = [];
