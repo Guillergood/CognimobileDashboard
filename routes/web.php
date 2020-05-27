@@ -2,11 +2,14 @@
 
 Route::redirect('/', '/login');
 
+Route::redirect('/admin', '/admin/results');
+
 Route::redirect('/home', '/admin/results');
 
 Auth::routes(['register' => false]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
@@ -33,4 +36,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('results', 'ResultsController');
 
+    Route::post('tests/create','TestController@store');
+
 });
+
+Route::resource('tests', 'TestController');

@@ -47,10 +47,10 @@
                     <div class="row text-center">
                         <div class="col-sm-12 col-md mb-sm-2 mb-0">
                             <button type="button" class="btn btn-info align-content-center" aria-expanded="false" onclick="saveTest()">
-                                <i class="fas fa-download">
+                                <i class="fas fa-cloud-upload-alt">
 
                                 </i>
-                                Download test
+                                Save test
                             </button>
                         </div>
                     </div>
@@ -762,8 +762,8 @@
                 resultArea.classList.remove("d-none");
             }
 
-            openWindowWithPostRequest();
-
+            //openWindowWithPostRequest();
+            createNewTest();
 
         }
 
@@ -775,6 +775,36 @@
     function openWindowWithPostRequest() {
         let winName = 'downloadTestWindow';
         let winURL='create/download';
+        let windowoption='resizable=yes,height=600,width=800,location=0,menubar=0,scrollbars=1';
+        let params = { 'name' : document.getElementById("name").value,'data' :JSON.stringify(test), "_token": $("meta[name='csrf-token']").attr("content")};
+        let form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", winURL);
+        form.setAttribute("target",winName);
+        for (let i in params) {
+            if (params.hasOwnProperty(i)) {
+                let input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = i;
+                input.value = params[i];
+                form.appendChild(input);
+            }
+        }
+        document.body.appendChild(form);
+        window.open('', winName,windowoption);
+        form.target = winName;
+        form.submit();
+        document.body.removeChild(form);
+    }
+
+    function createNewTest() {
+        let winName = 'CreateTestWindow';
+
+        // Find everything up to the first slash and save it in a backreference
+        regexp = /(\w+:\/\/[^\/]+)\/.*/;
+
+        // Replace the href with the backreference and the new uri
+        let winURL = window.location.href.replace(regexp, "$1/admin/tests/create");
         let windowoption='resizable=yes,height=600,width=800,location=0,menubar=0,scrollbars=1';
         let params = { 'name' : document.getElementById("name").value,'data' :JSON.stringify(test), "_token": $("meta[name='csrf-token']").attr("content")};
         let form = document.createElement("form");

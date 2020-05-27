@@ -44,7 +44,6 @@ class ResultsController extends Controller
     public function store(StoreResultRequest $request)
     {
         //abort_unless(\Gate::allows('result_create'), 403);
-        dd($request->all());
 
         $result = Result::create($request->all());
 
@@ -91,7 +90,6 @@ class ResultsController extends Controller
 
     public function download(Request $request){
 
-        $value = false;
         $filename = $request->input('name');
         $data = $request->input('data');
 

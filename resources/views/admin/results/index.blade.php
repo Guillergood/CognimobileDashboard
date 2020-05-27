@@ -225,7 +225,6 @@
 
         let offsetX = 0.09;
         let offsetY = 0.07;
-        //let offsetY = -0.15; If it is Linux server
 
         let proportionX = canvasElement.width/graphTaskInfo.width;
         let proportionY = canvasElement.height/graphTaskInfo.height;
