@@ -31,10 +31,14 @@ class HomeController
         $k = 0;
 
 
-
         foreach($json["study"] as $key => $value) {
             if(strpos($key, 'study_') !== false){
-              $json["study"][$key] = $studiesValues[$i];
+              if($key == "study_number" || $key == "study_start"){
+                $json["study"][$key] = (int)$studiesValues[$i];
+              }
+              else{
+                $json["study"][$key] = $studiesValues[$i];
+              }
               $i++;
             }
             else if (strpos($key, 'research_') !== false){
