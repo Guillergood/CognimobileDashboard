@@ -12,3 +12,8 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+
+/aware-micro/build/
+/aware-micro/.gradle/
+/aware-micro/.idea/
+/aware-micro/src/main/resources/cache/

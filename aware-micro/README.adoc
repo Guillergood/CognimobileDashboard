@@ -1,0 +1,107 @@
+= AWARE Micro
+
+This is the new AWARE server for conducting studies using AWARE. It is a reactive, non-blocking server able to handle thousands of requests per second on a single machine.
+
+This can be run on any OS as it is a JVM server implementation. This server is built using image:https://img.shields.io/badge/vert.x-3.8.4-purple.svg[link="https://vertx.io"]. It is compatible with the existing AWARE clients.
+
+#This is not compatible with the old dashboard located at api.awareframework.com. We are working on a new front-end to interface with AWARE Micro deployments.#
+
+== Deploying server
+
+The only dependency you need on your server is having Java (OpenJDK) installed.
+
+For Debian/Ubuntu:
+```
+sudo apt install default-jdk
+```
+
+For CentOS/Fedora:
+```
+sudo dnf install java-latest-openjdk-devel
+```
+
+Set the default Java compiler to the latest JDK and choose the JDK, not JRE.
+
+Debian/Ubuntu
+```
+sudo update-alternatives --config java
+```
+
+CentOS/Fedora
+```
+sudo alternatives --config java
+```
+
+== Getting the server code
+
+Make sure you have Git installed on your server:
+
+For Debian/Ubuntu:
+```
+sudo apt install git
+```
+
+For CentOS/Fedora:
+```
+sudo dnf install git
+```
+
+Check out the latest source code of the server
+```
+git clone https://github.com/denzilferreira/aware-micro.git
+```
+
+== Running the server with support for runtime study configuration changes
+
+```
+cd aware-micro
+./gradlew clean build run
+```
+
+The first time you run this, it will cache the settings from the client and all the plugins into an *aware-config.json*. Once you stop seeing cached messages, you can stop the server using CTRL+C. You can edit this file to configure the database, SSL certificates, ports, and sensor & plugin settings for your study.
+
+=== Deploy the study (dynamic configuration)
+Once you are happy with the configuration, you can keep your server active by creating a screen and running the instance inside that screen.
+```
+screen
+./gradlew run
+```
+If you open a new terminal and edit the aware-config.json file, the changes are applied immediately on the server. The clients will retrieve the new configuration after 15 minutes.
+
+== Running the server that won't change study configuration half-way
+
+```
+cd aware-micro
+./gradlew clean build shadowJar
+```
+
+This will build and create .jar file in build/libs. Change to this directory and run the server for the first time:
+```
+cd build/libs
+java -jar micro-1.0.0-SNAPSHOT-fat.jar
+```
+This will create a file aware-config.json. Press CTRL+C to stop your server. You can edit this file to configure what database will be used and port, encryption and sensor & plugin settings for your study.
+
+=== Deploy the study (static configuration)
+Once you are happy with the configuration, you can keep your server active by creating a screen and running the instance inside that screen.
+```
+screen
+java -jar micro-1.0.0-SNAPSHOT-fat.jar
+```
+== Securing your server with LetsEncrypt
+Depending on the OS you have, follow the instructions from: https://certbot.eff.org/. 
+
+In the question: My HTTP website is running <Software, choose None of the above> on <System, pick your OS> and follow the instructions to get fullchain.pem and privkey.pem files for your domain. Once you have these two files, set the following permissions so that Gradle can read them and use them on your server:
+
+```
+chmod 770 PATH_TO/fullchain.pem
+chmod 770 PATH_TO/privkey.pem
+```
+
+You can now edit *aware-config.json* to point to these two files by setting the variables:
+
+```
+path_fullchain_pem = "PATH_TO/fullchain.pem"
+path_key_pem = "PATH_TO/privkey.pem"
+```
+Update the server_host to have https:// in the URL and start your server. If you open your URL, the connection will be encrypted.
