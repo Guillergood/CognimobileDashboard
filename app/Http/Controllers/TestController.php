@@ -24,7 +24,7 @@ class TestController extends Controller
     {
         $tests = Test::all();
         //$tests = ["a","b","c"];
-        return view('admin.tests.index', ['tests' => $tests]);
+        return view('tests.index', ['tests' => $tests]);
     }
 
 
@@ -37,7 +37,7 @@ class TestController extends Controller
     public function show(Test $test)
     {
         //
-        return view('admin.tests.show', compact('test'));
+        return view('tests.show', compact('test'));
     }
 
 

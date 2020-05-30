@@ -43,6 +43,7 @@ return [
     'year'                                 => 'Year',
     'month'                                => 'Month',
     'logout'                               => 'Logout',
+    'settings'                               => 'Settings',
     'calendar'                             => 'Calendar',
     'dashboard'                            => 'Dashboard',
     'datatables'                           => [
@@ -365,6 +366,17 @@ return [
             'device_id_helper'   => '',
             'data'               => 'Data',
             'data_helper'        => '',
+        ],
+    ],
+    'tests'                              => [
+        'title'          => 'Tests',
+        'list'          => 'List test',
+        'title_singular' => 'Test',
+        'fields'         => [
+            'id'                => 'ID',
+            'id_helper'          => '',
+            'name'          => 'Name',
+            'name_helper'   => '',
         ],
     ],
 ];

@@ -15,15 +15,55 @@ class TestController extends Controller
 {
 
 
+  /**
+   * Display a listing of the resource.
+   *
+   * @return Application|Factory|View
+   */
+  public function index()
+  {
+      $tests = Test::all();
+      return view('admin.tests.index', ['tests' => $tests]);
+  }
+
   public function store(Request $request)
   {
-      // Validate the request...
-
       $test = Test::create($request->all());
 
-      $test->save();
+      $create = $test->save();
 
-      return "Test created, now you can close this window";
+      if ($create){
+
+        $data='Test created, now you can close this window';
+
+      }else{
+
+        $data='An error happened';
+
+      }
+
+      return $data;
+  }
+
+  public function destroy(Request $request)
+  {
+
+      $test = Test::find($request->id);
+      if($test){
+          $destroy = Test::destroy($request->id);
+      }
+
+      if ($destroy){
+
+        $data = 'Test has been removed';
+
+      }else{
+
+          $data='An error happened';
+
+      }
+
+      return $data;
   }
 
 

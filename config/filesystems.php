@@ -48,6 +48,13 @@ return [
             'root' => storage_path('app'),
         ],
 
+        'aware' => [
+            'driver' => 'local',
+            'root' => base_path('aware-micro'),
+            'url'       => env('APP_URL').'/aware-micro',
+            'public'    => true,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

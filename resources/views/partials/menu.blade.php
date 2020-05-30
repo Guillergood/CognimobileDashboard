@@ -2,6 +2,14 @@
     <nav class="sidebar-nav ps ps--active-y">
 
         <ul class="nav">
+            <li class="nav-item">
+                <a href="/admin" class="nav-link">
+                    <i class="nav-icon fas fa-cog">
+
+                    </i>
+                    {{ trans('global.settings') }}
+                </a>
+            </li>
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                     <i class="fas fa-vials nav-icon">
@@ -10,6 +18,14 @@
                     {{ trans('global.results.title') }}
                 </a>
                 <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a href="{{ route("admin.tests.index") }}" class="nav-link {{ request()->is('admin/tests') || request()->is('admin/tests/*') ? 'active' : '' }}">
+                            <i class="fas fa-list nav-icon">
+
+                            </i>
+                            {{ trans('global.tests.list') }}
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="{{ route("admin.results.create") }}" class="nav-link {{ request()->is('admin/results/create') || request()->is('admin/results/*') ? 'active' : '' }}">
                             <i class="fas fa-plus-square nav-icon">
