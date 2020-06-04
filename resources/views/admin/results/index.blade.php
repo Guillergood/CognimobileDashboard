@@ -224,7 +224,9 @@
         let ctx = canvasElement.getContext("2d");
 
         let offsetX = 0.09;
-        let offsetY = 0.07;
+        //let offsetY = 0.07; windows
+        let offsetY = -0.15; //linux
+        
 
         let proportionX = canvasElement.width/graphTaskInfo.width;
         let proportionY = canvasElement.height/graphTaskInfo.height;
@@ -316,7 +318,8 @@
         let ctx = canvasElement.getContext("2d");
 
         let offsetX = 0.09;
-        let offsetY = 0.07;
+        //let offsetY = 0.07; windows
+        let offsetY = -0.15; //linux
 
         let proportionX = canvasElement.width/drawTaskInfo.width;
         let proportionY = canvasElement.height/drawTaskInfo.height;
