@@ -268,7 +268,7 @@
 
         let offsetX = 0.09;
         //let offsetY = 0.07; windows
-        let offsetY = -0.15; //linux
+        let offsetY = 0.03; //linux
 
         let proportionX = canvasElement.width/graphTaskInfo.width;
         let proportionY = canvasElement.height/graphTaskInfo.height;
@@ -361,7 +361,7 @@
 
         let offsetX = 0.09;
         //let offsetY = 0.07; windows
-        let offsetY = -0.15; //linux
+        let offsetY = 0.03; //linux
 
         let proportionX = canvasElement.width/drawTaskInfo.width;
         let proportionY = canvasElement.height/drawTaskInfo.height;
