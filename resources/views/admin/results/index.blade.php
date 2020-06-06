@@ -469,7 +469,7 @@
         let answerText = document.createElement('h4');
         let expectedAnswerText = document.createElement('h4');
 
-        answerText.innerText = "Answer: " + memoryTaskInfo.words.toString();
+        answerText.innerText = "Answer: " + memoryTaskInfo.answer.toString();
         expectedAnswerText.innerText = "Answer: " + memoryTaskInfo.expected_answers.toString();
 
         card.appendChild(answerText);
