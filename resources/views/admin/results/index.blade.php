@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 @foreach($results as $result)
-    <div class="content">
+    <div class="content" id="{{ $result->_id ?? '' }}">
         <div class="c-body">
             <div class="fade-in">
                 <div class="card">
@@ -11,6 +11,12 @@
                                 <h4 class="card-title mb-0">ID: {{ $result->_id ?? '' }}</h4>
                                 <div class="small text-muted">Device ID: {{ $result->device_id ?? '' }}</div>
                                 <div class="small text-muted">Created at: {{ $result->timestamp->format('d M Y') ?? '' }}</div>
+                                <button type="button" class="btn btn-danger" aria-expanded="false" onclick="deleteResult({{$result->_id}})">
+                                  <i class="fas fa-trash">
+
+                                  </i>
+                                  Delete
+                                </button>
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-info dropdown-toggle" aria-expanded="false" onclick="onDropDown(this,{{$result->data}})">
                                         Display Results
@@ -42,6 +48,43 @@
     var displayData;
     var testCard;
     var testCardBody;
+
+    function deleteResult(id) {
+      var message = 'Are you sure you want to delete the item?';
+      if (confirm(message)) {
+        let winName = 'DeleteResultWindow';
+
+        // Find everything up to the first slash and save it in a backreference
+        regexp = /(\w+:\/\/[^\/]+)\/.*/;
+
+        // Replace the href with the backreference and the new uri
+        let winURL = window.location.href.replace(regexp, "$1/admin/results/delete");
+        let windowoption='resizable=yes,height=600,width=800,location=0,menubar=0,scrollbars=1';
+        let params = { 'id' : id, "_token": $("meta[name='csrf-token']").attr("content")};
+        let form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", winURL);
+        form.setAttribute("target",winName);
+        for (let i in params) {
+            if (params.hasOwnProperty(i)) {
+                let input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = i;
+                input.value = params[i];
+                form.appendChild(input);
+            }
+        }
+        document.body.appendChild(form);
+        window.open('', winName,windowoption);
+        form.target = winName;
+        form.submit();
+        document.body.removeChild(form);
+
+        let rowToDelete = document.getElementById(id);
+        let parent = rowToDelete.parentElement;
+        parent.removeChild(rowToDelete);
+      }
+    }
 
     function onDropDown(buttonPressed, data) {
 
@@ -226,7 +269,6 @@
         let offsetX = 0.09;
         //let offsetY = 0.07; windows
         let offsetY = -0.15; //linux
-        
 
         let proportionX = canvasElement.width/graphTaskInfo.width;
         let proportionY = canvasElement.height/graphTaskInfo.height;

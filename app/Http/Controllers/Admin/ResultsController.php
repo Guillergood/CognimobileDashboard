@@ -51,15 +51,24 @@ class ResultsController extends Controller
     }
 
 
-    public function destroy(Result $result)
+    public function destroy(Request $request)
     {
-        abort_unless(\Gate::allows('result_delete'), 403);
 
-        $result->delete();
+        $affected = DB::table('results')->where('_id', $request->id)->delete();
 
-        return back();
+
+        if ($affected > 0){
+
+          $data = 'Result has been removed';
+
+        }else{
+
+            $data='An error happened';
+
+        }
+
+        return $data;
     }
-
     public function massDestroy(MassDestroyResultRequest $request)
     {
         Result::whereIn('id', request('ids'))->delete();

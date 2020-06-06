@@ -32,6 +32,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::post('results/edit','ResultsController@edit');
 
+    Route::post('results/delete', 'ResultsController@destroy');
+
     Route::post('results/create/download','ResultsController@download');
 
     Route::resource('results', 'ResultsController');

@@ -94,6 +94,7 @@ function saveConfigFile(){
 
 var studyCard;
 var studyCardBody;
+var isCognimobileTestUrl;
 
 
 
@@ -102,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let study = JSON.parse(document.getElementById("study").innerText);
   let sensors = JSON.parse(document.getElementById("sensors").innerText);
   let plugins = JSON.parse(document.getElementById("plugins").innerText);
+  isCognimobileTestUrl = false;
   createTabForStudy();
   traverse(study);
   createTabForSensors();
@@ -161,6 +163,9 @@ function traverse(data) {
             switch (index) {
               case "package_name":
               case "plugin":
+                if(data[index] === "plugin_cognimobile"){
+                  isCognimobileTestUrl = true;
+                }
               case "title":
                 let titleSubRow = document.createElement('h5');
                 titleSubRow.className="col-sm card-title taskType";
@@ -181,20 +186,29 @@ function traverse(data) {
                 append = false;
                 break;
               case "defaultValue":
-              if(typeof data[index] !== 'boolean' && data[index] !== "false" && data[index] !== "true"){
-                let input = document.createElement("input");
-                input.className="ml-3 value defaultValue";
-                input.setAttribute("required", "");
-                input.value = data[index];
-                label = document.createElement("label")
-                label.className = "testPadding";
-                label.innerText = "Value: ";
-                label.appendChild(input);
-                row.appendChild(label);
-              }
-              else{
-                createBinaryDropdown(row,label,data[index],false);
-              }
+                if(typeof data[index] !== 'boolean' && data[index] !== "false" && data[index] !== "true"){
+                  let input = document.createElement("input");
+                  input.className="ml-3 value defaultValue";
+                  input.setAttribute("required", "");
+                  if(isCognimobileTestUrl){
+                    input.setAttribute("readonly", true);
+                    regexp = /(\w+:\/\/[^\/]+)\/.*/;
+                    input.value = window.location.href.replace(regexp, "$1/tests");
+                    isCognimobileTestUrl = false;
+                  }
+                  else{
+                    input.value = data[index];
+                  }
+                  label = document.createElement("label")
+                  label.className = "testPadding";
+                  label.innerText = "Value: ";
+                  label.appendChild(input);
+                  row.appendChild(label);
+                }
+                else{
+                  createBinaryDropdown(row,label,data[index],false);
+                }
+
               break;
               default:
                 title = document.createElement('h4');
