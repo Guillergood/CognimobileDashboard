@@ -29,7 +29,14 @@
                                     </button>
 
                                 </div>
+
                             </div>
+                        </div>
+                        <div class="col-sm-12 col-md mb-sm-2 mb-0 card-footer">
+                          <div class="text-muted">Score:</div><strong>{{ str_replace("}","",substr($result->data , strpos($result->data, "overall_score")+16, 2)) ?? '' }} ({{str_replace("}","",substr($result->data , strpos($result->data, "overall_score")+16, 2))/36}}%)</strong>
+                          <div class="progress progress-xs mt-2">
+                            <div class="progress-bar bg-gradient-success" role="progressbar" style="width: {{str_replace("}","",substr($result->data , strpos($result->data, "overall_score")+16, 2))/36}}%" aria-valuenow="{{str_replace("}","",substr($result->data , strpos($result->data, "overall_score")+16, 2))}}" aria-valuemin="0" aria-valuemax="36"></div>
+                          </div>
                         </div>
                     </div>
                 </div>
