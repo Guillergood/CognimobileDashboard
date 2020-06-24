@@ -1,6 +1,8 @@
-# Laravel + CoreUI: Adminpanel Boilerplate
+![Cognimobile Dashboard](https://github.com/Guillergood/CognimobileDashboard/blob/master/Logo%20final.png?raw=true)
 
-It is a demo project for demonstrating what can be generated with new 2019 version of [QuickAdminPanel](https://2019.quickadminpanel.com) tool. This boilerplate was fully __generated__, without adding any custom line of code.
+# Cognimobile Dashboard
+
+This dashboard is part of the [Cognimobile Project](https://github.com/Guillergood/CogniMobilePlatform)
 
 ## What's inside
 
@@ -8,8 +10,6 @@ It is a demo project for demonstrating what can be generated with new 2019 versi
 - Users/Roles/permissions management function (based on our own code similar to Spatie Roles-Permissions)
 - One demo CRUD for Products management - name/description/price
 - Everything that is needed for CRUDs: model+migration+controller+requests+views
-
-From that boilerplate you can manually create more CRUDs, assign permissions etc. Or use our [online generator](https://2019.quickadminpanel.com) for this.
 
 ## Screenshots
 
@@ -20,6 +20,14 @@ From that boilerplate you can manually create more CRUDs, assign permissions etc
 ![Laravel + CoreUI screenshot 03](https://laraveldaily.com/wp-content/uploads/2019/04/Screen-Shot-2019-04-17-at-5.51.10-AM.png)
 
 ![Laravel + CoreUI screenshot 04](https://laraveldaily.com/wp-content/uploads/2019/04/Screen-Shot-2019-04-17-at-5.52.03-AM.png)
+
+
+
+## Prerequisites
+
+The server to host the project needs:
+- Composer
+- A database
 
 ## How to use
 
