@@ -28,6 +28,7 @@ This dashboard is part of the [Cognimobile Project](https://github.com/Guillergo
 ## Prerequisites
 
 The server to host the project needs:
+- Installation of: php-xml, php-zip, php-curl.
 - Composer
 - A database
 
